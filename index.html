@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sagit Zilberman — Behavioral Science & Quantitative Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,400;0,500;0,600;1,6..72,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAFAF8; --ink:#14181D; --muted:#5F6874; --faint:#8A939E;
+  --rule:#E1E4E7; --rule-soft:#EDEFF1;
+  --signal:#15616D; --signal-2:#3E8C97; --signal-3:#8FBEC3; --signal-4:#CFE0E1;
+  --warn:#9A5B36;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16.5px;line-height:1.65;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:820px;margin:0 auto;padding:0 32px 120px}
+a{color:var(--signal);text-decoration:none;border-bottom:1px solid var(--signal-3)}
+a:hover{border-bottom-color:var(--signal)}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--faint);font-weight:500;margin:0}
+
+header{padding:84px 0 0}
+h1{font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,60px);
+  line-height:1.06;letter-spacing:-.02em;margin:14px 0 12px}
+.headline{font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:400;
+  font-size:clamp(19px,2.4vw,23px);line-height:1.4;color:var(--signal);margin:0 0 22px;max-width:34ch}
+.lede{font-size:17px;color:var(--muted);max-width:64ch;margin:0 0 32px}
+.lede strong{color:var(--ink);font-weight:500}
+.links{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.links a,.links span{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;
+  padding:13px 20px 13px 0;margin-right:20px;border-bottom:none;display:inline-flex;align-items:center;gap:8px}
+.links span{color:var(--faint)}
+.links .dot{width:5px;height:5px;border-radius:50%;background:var(--signal-3);flex:none}
+.links span .dot{background:var(--rule)}
+
+section{padding-top:76px}
+.shead{margin-bottom:30px}
+.shead h2{font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:31px;
+  letter-spacing:-.015em;margin:8px 0 0}
+.shead .note{font-size:14.5px;color:var(--muted);margin:8px 0 0;max-width:64ch}
+
+.project{border-top:2px solid var(--ink);padding-top:24px;margin-top:64px}
+.project:first-of-type{margin-top:0}
+.pnum{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+  color:var(--signal);font-weight:500;text-transform:uppercase}
+.ptitle{font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:26px;line-height:1.2;
+  letter-spacing:-.01em;margin:8px 0 6px}
+.pcontext{font-size:14px;color:var(--muted);margin:0 0 8px}
+.byline{font-size:13.5px;color:var(--warn);margin:0 0 28px;padding:9px 13px;
+  background:#FAF4EF;border-left:2px solid var(--warn)}
+
+.field{display:grid;grid-template-columns:132px 1fr;gap:26px;padding:19px 0;
+  border-bottom:1px solid var(--rule-soft)}
+.field > .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);font-weight:500;padding-top:5px}
+.field > .v{margin:0;font-size:15.5px}
+.field .v p{margin:0 0 10px}
+.field .v p:last-child{margin-bottom:0}
+.field ul{margin:0;padding-left:19px}
+.field li{margin-bottom:7px}
+.field li:last-child{margin-bottom:0}
+code{font-family:'IBM Plex Mono',monospace;font-size:.88em;background:#EFF3F3;
+  padding:1.5px 5px;border-radius:2px;color:#0F4C55}
+
+figure{margin:34px 0 0;padding:26px 0 0;border-top:1px solid var(--rule)}
+figcaption{margin-top:16px;font-size:13.5px;color:var(--muted);line-height:1.55}
+figcaption b{display:block;color:var(--ink);font-weight:500;font-size:14px;
+  margin-bottom:5px;letter-spacing:-.005em}
+
+.bars{display:flex;flex-direction:column;gap:3px}
+.brow{display:grid;grid-template-columns:minmax(96px,196px) 1fr 54px;align-items:center;gap:14px;padding:6px 0}
+.brow .lbl{font-size:13.5px;color:var(--muted);line-height:1.3}
+.brow.win .lbl{color:var(--ink);font-weight:500}
+.track{height:22px;background:#F0F2F2}
+.fill{height:100%;background:var(--signal-4)}
+.brow.win .fill{background:var(--signal)}
+.brow.base .fill{background:#E3E6E8}
+.brow .val{font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-align:right;color:var(--muted)}
+.brow.win .val{color:var(--signal);font-weight:500}
+.axis{display:flex;margin-top:9px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--faint)}
+.axis-inner{display:grid;grid-template-columns:minmax(96px,196px) 1fr 54px;gap:14px;width:100%}
+.axis-inner .ticks{display:flex;justify-content:space-between}
+
+table.pc{width:100%;border-collapse:collapse;font-size:14px}
+table.pc th{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint);font-weight:500;text-align:right;
+  padding:0 0 9px 14px;border-bottom:1px solid var(--ink);white-space:nowrap}
+table.pc th:first-child{text-align:left;padding-left:0}
+table.pc td{padding:8px 0 8px 14px;text-align:right;border-bottom:1px solid var(--rule-soft);
+  font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--muted)}
+table.pc td:first-child{text-align:left;padding-left:0;font-family:'IBM Plex Sans',sans-serif;
+  font-size:14.5px;color:var(--ink)}
+table.pc tr.hi td{color:var(--signal)}
+table.pc tr.hi td:first-child{color:var(--ink);font-weight:500}
+table.pc tr.dim td,table.pc tr.dim td:first-child{color:var(--faint)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cm-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table.cm{border-collapse:collapse;font-family:'IBM Plex Mono',monospace;font-size:12.5px;min-width:420px}
+table.cm th{font-weight:500;color:var(--faint);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;padding:6px 8px;text-align:center;white-space:nowrap}
+table.cm th.rowh{text-align:right;padding-right:12px;font-size:11.5px;letter-spacing:.02em;
+  text-transform:none;color:var(--muted);white-space:nowrap}
+table.cm td{width:74px;height:42px;text-align:center;vertical-align:middle;
+  border:1px solid var(--paper);color:var(--ink)}
+table.cm td.diag{font-weight:600}
+.cm-corner{font-size:10px;color:var(--faint);text-align:right;padding-right:12px;line-height:1.3}
+
+.demo{margin-top:32px;padding-top:24px;border-top:1px solid var(--rule)}
+.demo .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);font-weight:500;margin-bottom:14px}
+.demo ul{margin:0;padding-left:19px}
+.demo li{margin-bottom:8px;font-size:15.5px}
+
+.prose p{max-width:64ch;margin:0 0 16px;font-size:16px}
+.prose p:last-child{margin-bottom:0}
+.prose .muted{color:var(--muted);font-size:15px}
+
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(226px,1fr));gap:0 40px}
+.skill{padding:18px 0;border-top:1px solid var(--rule-soft)}
+.skill .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--faint);font-weight:500;margin-bottom:8px}
+.skill .v{font-size:15px;color:var(--ink);line-height:1.6}
+
+footer{margin-top:88px;padding-top:22px;border-top:1px solid var(--rule);
+  font-size:13px;color:var(--faint);max-width:64ch}
+
+@media (max-width:680px){
+  .wrap{padding:0 20px 80px}
+  header{padding-top:52px}
+  section{padding-top:56px}
+  .field{grid-template-columns:1fr;gap:8px;padding:16px 0}
+  .field > .k{padding-top:0}
+  .brow{grid-template-columns:1fr;gap:5px;padding:9px 0}
+  .brow .val{text-align:left}
+  .axis-inner{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Behavioral Science · Quantitative Research · Applied Machine Learning</p>
+  <h1>Sagit Zilberman</h1>
+  <p class="headline">Behavioral science researcher working at the intersection of psychology, quantitative methods, and applied machine learning.</p>
+  <p class="lede">
+    M.A. research track in Psychology at the Hebrew University of Jerusalem, with concurrent graduate study in Business Administration, specializing in organizational behavior and in data science and AI. My research examines <strong>emotion regulation</strong> and behavioral data; my applied work centers on <strong>research design, predictive modeling, and validation under leakage and temporal constraints</strong>. I work extensively with frontier AI systems as research instruments — for analysis support, synthesis, and evaluating model output.
+  </p>
+  <nav class="links" aria-label="Profiles and documents">
+    <a href="#" data-link="resume"><span class="dot"></span>Résumé</a>
+    <a href="#" data-link="linkedin"><span class="dot"></span>LinkedIn</a>
+    <span><span class="dot"></span>GitHub — to add</span>
+    <span><span class="dot"></span>Google Scholar — to add</span>
+  </nav>
+</header>
+
+<section id="work">
+  <div class="shead">
+    <p class="eyebrow">Selected work</p>
+    <h2>Machine learning &amp; data science</h2>
+    <p class="note">Each project is documented with its actual evaluation output rather than a summary of it. Where a result was negative, it is reported as a result. Code and figures available on request.</p>
+  </div>
+
+  <!-- ===================== PROJECT 1 ===================== -->
+  <article class="project">
+    <p class="pnum">01 — Supervised learning · temporal validation</p>
+    <h3 class="ptitle">Predicting World Cup match outcomes from engineered pre-match strength features</h3>
+    <p class="pcontext">Graduate data science coursework, Hebrew University of Jerusalem · Python 3.12 · scikit-learn</p>
+    <p class="byline"><strong>Two-person team project.</strong> My contribution: <em>[describe your role — e.g. Elo implementation and feature engineering, temporal validation design, model evaluation]</em></p>
+
+    <div class="field">
+      <div class="k">Question</div>
+      <div class="v"><p>Can pre-match team-strength features predict whether a World Cup match ends in a Team A win, a draw, or a Team B win — and which characteristics actually carry the signal?</p></div>
+    </div>
+
+    <div class="field">
+      <div class="k">Data</div>
+      <div class="v">
+        <p><strong>45,816 international matches</strong> across 33 columns, spanning 1872–2026, compiled from FIFA's official tournament records. All matches were processed chronologically to build team histories; only World Cup finals matches were retained as modeling observations — <strong>964 matches (1930–2022)</strong> for development and the first <strong>90 matches of the 2026 tournament</strong> as an untouched out-of-time test set.</p>
+        <p>Target: three-class outcome, moderately imbalanced in development (57% Team A win, 18.6% draw, 24% Team B win). Knockout matches decided on penalties were coded to the shootout winner.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="k">Feature engineering</div>
+      <div class="v">
+        <p>The raw data contained no measure of relative team strength. Six predictors were constructed from match history alone:</p>
+        <ul>
+          <li><strong>Rolling Elo ratings</strong> computed chronologically over all 45,816 matches, initialized at 1,500, with competition-specific K factors (60 for World Cup finals, 40–50 for major tournaments, 20 default) and a goal-margin multiplier. <code>elo_diff</code> is the pre-match difference.</li>
+          <li><strong>Recent form:</strong> difference in average points per game and average goal difference across each team's previous 10 matches.</li>
+          <li><strong>Head-to-head:</strong> smoothed historical result rate, <code>(score + 1)/(meetings + 2)</code>, to avoid extreme estimates from few meetings, plus the meeting count as an evidence indicator.</li>
+          <li><strong>Tournament context:</strong> knockout-stage indicator, since draw frequency differs sharply by stage (24.4% in group play vs 1.6% in knockouts).</li>
+        </ul>
+        <p>Every feature was recorded <em>before</em> its own match updated the historical record, so no outcome could influence its own predictors.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="k">Validation</div>
+      <div class="v">
+        <p><strong>Expanding-window temporal cross-validation</strong> across five folds, each holding out a complete World Cup (2006, 2010, 2014, 2018, 2022) and predicting it using only earlier tournaments. Random k-fold was explicitly rejected: it would train on later tournaments to predict earlier ones, which neither reflects the real prediction setting nor prevents temporal leakage.</p>
+        <p>Metrics: macro-F1 as primary, plus accuracy, balanced accuracy, draw recall, and multiclass log-loss — the last because the intended output is a probability for decision support, not a hard label.</p><p>Both classifiers used balanced class weighting to counteract the low base rate of draws: standardized logistic regression (<code>C=1.0</code>) and a random forest of 400 trees with a minimum of 10 samples per leaf. Permutation importance was averaged over 30 repeats.</p>
+      </div>
+    </div>
+
+    <figure>
+      <div class="tscroll">
+      <table class="pc">
+        <thead>
+          <tr><th>Model</th><th>CV macro-F1</th><th>SD</th><th>Test acc.</th><th>Test macro-F1</th><th>Balanced acc.</th><th>Draw recall</th><th>Log-loss</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hi"><td>Logistic regression</td><td>0.494</td><td>0.037</td><td>0.600</td><td>0.602</td><td>0.627</td><td>0.650</td><td>0.819</td></tr>
+          <tr><td>Random forest</td><td>0.496</td><td>0.051</td><td>0.567</td><td>0.552</td><td>0.564</td><td>0.400</td><td>0.845</td></tr>
+          <tr class="dim"><td>Higher-Elo rule</td><td>—</td><td>—</td><td>0.667</td><td>0.495</td><td>0.575</td><td>0.000</td><td>—</td></tr>
+          <tr class="dim"><td>Majority baseline</td><td>—</td><td>—</td><td>0.500</td><td>0.222</td><td>0.333</td><td>0.000</td><td>—</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <figcaption>
+        <b>Figure 1 — Temporal validation and out-of-time test performance</b>
+        The naive "higher-Elo team wins" rule achieves the <em>highest accuracy</em> of any approach (0.667) while scoring 0.495 macro-F1 and never predicting a single draw. This is the clearest illustration of why the metric was chosen before the models were run: optimizing accuracy here would have selected a rule that cannot represent one of the three outcomes at all.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <div class="cm-scroll">
+        <table class="cm">
+          <caption class="cm-corner" style="caption-side:top;text-align:left;padding:0 0 10px">rows = actual · columns = predicted · n = 90</caption>
+          <thead>
+            <tr><th class="cm-corner"></th><th>Team A win</th><th>Draw</th><th>Team B win</th></tr>
+          </thead>
+          <tbody>
+            <tr><th class="rowh">Team A win</th>
+              <td class="diag" style="background:#15616D;color:#fff">23</td>
+              <td style="background:#5DA3AC;color:#fff">18</td>
+              <td style="background:#EAF2F2">4</td></tr>
+            <tr><th class="rowh">Draw</th>
+              <td style="background:#EAF2F2">4</td>
+              <td class="diag" style="background:#7FB4BC;color:#fff">13</td>
+              <td style="background:#EEF4F4">3</td></tr>
+            <tr><th class="rowh">Team B win</th>
+              <td style="background:#EEF4F4">3</td>
+              <td style="background:#EAF2F2">4</td>
+              <td class="diag" style="background:#5DA3AC;color:#fff">18</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption>
+        <b>Figure 2 — Logistic regression on the 2026 out-of-time test set</b>
+        The model's characteristic error is visible in a single cell: 18 of the 45 actual Team A wins were classified as draws. Balanced class weighting bought draw recall of 65% at the cost of over-predicting the class — 35 draws predicted, 13 correct. This is the trade-off that makes the output usable as a close-match risk signal rather than as a draw call.
+      </figcaption>
+    </figure>
+
+    <figure>
+      <div class="bars" role="img" aria-label="Permutation importance: elo_diff 0.143, form_gd_diff 0.016, is_knockout 0.008.">
+        <div class="brow win"><span class="lbl">elo_diff</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">0.143</span></div>
+        <div class="brow"><span class="lbl">form_gd_diff</span><span class="track"><span class="fill" style="width:11.2%"></span></span><span class="val">0.016</span></div>
+        <div class="brow"><span class="lbl">is_knockout</span><span class="track"><span class="fill" style="width:5.6%"></span></span><span class="val">0.008</span></div>
+        <div class="brow"><span class="lbl">form_pts_diff, h2h_rate_a, h2h_n</span><span class="track"><span class="fill" style="width:1%"></span></span><span class="val">≈0</span></div>
+        <div class="axis"><div class="axis-inner"><span></span><span class="ticks"><span>0.00</span><span>0.07</span><span>0.15</span></span><span></span></div></div>
+      </div>
+      <figcaption>
+        <b>Figure 3 — Random forest permutation importance, macro-F1 drop on the 2026 test set</b>
+        Elo difference (SD 0.046) dominates by roughly an order of magnitude. The remaining features sit at or near zero relative to their permutation variance. Because the predictors are correlated and the test set is small, these are read as descriptive model associations, not independent effects.
+      </figcaption>
+    </figure>
+
+    <div class="field" style="border-top:1px solid var(--rule);margin-top:34px;padding-top:26px">
+      <div class="k">Findings</div>
+      <div class="v">
+        <p>Logistic regression matched random forest on cross-validation (0.494 vs 0.496) but was more stable across folds and better on every out-of-time test metric. An explicit overfitting check explained why: random forest reached <strong>0.638 macro-F1 in training against 0.496 in validation</strong>, a gap of 0.142, while logistic regression showed no training advantage at all (0.459 vs 0.494).</p>
+        <p>An ablation produced the central negative result. Elo alone achieved 0.490; Elo plus both recent-form variables scored <em>lower</em> at 0.469; all six features together reached 0.494 — an improvement of 0.004 over Elo alone, well inside fold-to-fold variation. <strong>Recent form, head-to-head history, and tournament stage added no measurable predictive value beyond Elo.</strong></p>
+        <p>The descriptive gradient behind that result is clean: with a pre-match Elo gap under 50 points the favourite won 48% of matches, rising to 63% at 101–200 points and 70% above 200.</p><p>On calibration: the model was correct on 84.4% of the 32 matches where its top predicted probability reached 0.55, against 46.6% on the remaining 58. Draw detection improved markedly over the baselines (65.0% recall) but at 37% precision, so draw probability is usable as a close-match risk signal, not as a draw prediction.</p>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="k">What this demonstrates</div>
+      <ul>
+        <li><strong>Validation design matched to the prediction problem</strong> — expanding-window temporal folds and a held-out future tournament, with random k-fold explicitly ruled out and the reason documented.</li>
+        <li><strong>Domain feature engineering from raw event data</strong> — implementing a sequential rating system over 45,816 records, with smoothing chosen to handle sparse matchup history.</li>
+        <li><strong>Diagnosing model behavior, not just ranking models</strong> — quantified train/validation gaps, permutation importance, and a feature ablation that overturned the project's own hypothesis.</li>
+        <li><strong>Probabilistic output translated into decision rules</strong> — confidence-thresholded accuracy and precision/recall trade-offs stated in operational terms.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ===================== PROJECT 2 ===================== -->
+  <article class="project">
+    <p class="pnum">02 — NLP · information retrieval · unsupervised learning</p>
+    <h3 class="ptitle">Comparing lexical and embedding-based retrieval, and clustering news documents</h3>
+    <p class="pcontext">Graduate data science coursework, Hebrew University of Jerusalem · Python · gensim, rank_bm25, scikit-learn, NLTK</p>
+    <p class="byline"><strong>Two-person team project.</strong> My contribution: <em>[describe your role]</em></p>
+
+    <div class="field">
+      <div class="k">Question</div>
+      <div class="v"><p>How do lexical retrieval (TF-IDF, BM25) and distributional-semantic retrieval (Word2Vec) differ in what they return for short queries — and do unsupervised embedding clusters recover the editorial categories of a news corpus without seeing the labels?</p></div>
+    </div>
+
+    <div class="field">
+      <div class="k">Data</div>
+      <div class="v"><p>BBC Full Text corpus: <strong>2,225 articles</strong> across five categories (sport 511, business 510, politics 417, tech 401, entertainment 386). Preprocessing: lowercasing, non-alphabetic removal, whitespace tokenization, NLTK stop-word removal, minimum token length of three. Mean document length after cleaning: 212.5 tokens. Stemming and lemmatization were deliberately skipped so that all three retrieval methods received identical input and Word2Vec retained surface forms.</p></div>
+    </div>
+
+    <div class="field">
+      <div class="k">Methods</div>
+      <div class="v">
+        <ul>
+          <li><strong>Retrieval:</strong> TF-IDF with cosine similarity, BM25 (Okapi), and a skip-gram Word2Vec model trained on the corpus (100 dimensions, window 5, minimum count 5, 10 epochs), with documents and queries represented as mean in-vocabulary word vectors.</li>
+          <li><strong>Clustering:</strong> K-Means over L2-normalized mean Word2Vec document vectors, evaluated for K = 3–6 by silhouette score, with category labels withheld during fitting and selection.</li>
+          <li><strong>Supervised reference:</strong> one-vs-rest multiclass logistic regression on TF-IDF features, with TF-IDF refitted inside each training fold.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="k">Data quality</div>
+      <div class="v"><p>A full-text audit found <strong>98 exact duplicate pairs</strong> in the supplied corpus. Rather than ignoring them, the supervised evaluation used <strong>stratified group k-fold cross-validation with identical texts assigned to the same group</strong>, so duplicate copies could not appear in both training and validation. The duplicates also explained an artifact in retrieval: one query returned the same article in both top-two positions.</p></div>
+    </div>
+
+    <figure>
+      <div class="tscroll">
+      <table class="pc">
+        <thead><tr><th>Cluster (K = 5)</th><th>Size</th><th>Dominant category</th><th>Purity</th></tr></thead>
+        <tbody>
+          <tr class="hi"><td>Sport &amp; competition</td><td>477</td><td>sport</td><td>99.8%</td></tr>
+          <tr><td>Corporate &amp; markets</td><td>465</td><td>business</td><td>97%</td></tr>
+          <tr><td>Film, music &amp; celebrity</td><td>375</td><td>entertainment</td><td>94%</td></tr>
+          <tr><td>Consumer technology</td><td>391</td><td>tech</td><td>93%</td></tr>
+          <tr class="dim"><td>Politics, law &amp; regulation</td><td>517</td><td>politics</td><td>78%</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <figcaption>
+        <b>Figure 4 — K-Means clusters vs. withheld BBC categories</b>
+        Silhouette scores were 0.173, 0.180, 0.197 and 0.198 for K = 3 through 6; K = 5 was chosen over the marginally higher K = 6 for parsimony. Four clusters exceeded 93% purity. The politics cluster is the leaky one at 78% — it absorbs business fraud trials, sport doping cases and technology regulation, which share legal vocabulary. The modest absolute silhouette of ~0.20 was reported alongside the high purity rather than in place of it: the categories are recovered, but the embedding space does not separate them cleanly.
+      </figcaption>
+    </figure>
+
+    <div class="field" style="border-top:1px solid var(--rule);margin-top:34px;padding-top:26px">
+      <div class="k">Findings</div>
+      <div class="v">
+        <p>BM25 was the most consistent retriever, winning two of three queries. TF-IDF was strongest when literal query terms matched intent, but retrieved a rugby article for a football query on the strength of shared terms like "match" and "goal." Word2Vec captured broader semantic relationships — retrieving a motion-sensor phone article for a technology query without the word "technology" appearing — at the cost of query specificity, since vector averaging tends toward general topic rather than precise information need.</p>
+        <p>The supervised reference reached <strong>97% mean cross-validated accuracy (SD 0.8 pp)</strong>, establishing that the categories are strongly lexically separable and giving the unsupervised result something to be measured against.</p>
+      </div>
+    </div>
+
+    <div class="demo">
+      <div class="k">What this demonstrates</div>
+      <ul>
+        <li><strong>Text representation across paradigms</strong> — sparse lexical weighting, probabilistic ranking, and trained dense embeddings, compared on identical preprocessing.</li>
+        <li><strong>Unsupervised evaluation done honestly</strong> — labels withheld during fitting and K selection, then used only for post-hoc interpretation, with a weak silhouette reported next to strong purity.</li>
+        <li><strong>Detecting a data-quality problem and correcting the evaluation for it</strong> — duplicate-aware group cross-validation rather than an inflated accuracy figure.</li>
+        <li><strong>Qualitative error analysis</strong> — diagnosing <em>why</em> each method failed on specific queries, not only which scored higher.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ===================== PROJECT 3 ===================== -->
+  <article class="project">
+    <p class="pnum">03 — Classification · API data construction</p>
+    <h3 class="ptitle">Predicting Nobel Prize category from biography and education history</h3>
+    <p class="pcontext">Graduate data science coursework (Course 55810), Hebrew University of Jerusalem · Python · scikit-learn, statsmodels</p>
+
+    <div class="field">
+      <div class="k">Summary</div>
+      <div class="v">
+        <p>Six-class classification over <strong>990 Nobel laureates (1901–2025)</strong>, testing whether educational mobility — how far a laureate studied from their birthplace — predicts prize category beyond demographics.</p>
+        <p>Education history did not exist in the source data. It was built by querying the <strong>Wikidata API</strong> for each laureate's institutions with session-level retry and backoff, resolving those institutions to coordinates, and computing great-circle distances. Skew was handled by median imputation, 95th-percentile winsorization, and log transformation — implemented as a <strong>custom scikit-learn transformer</strong> so those statistics were learned only within each training fold.</p>
+      </div>
+    </div>
+
+    <figure>
+      <div class="bars" role="img" aria-label="Macro-F1: country plus age 0.252, full multinomial 0.228, birth country 0.135, affiliation 0.112, majority baseline 0.064.">
+        <div class="brow win"><span class="lbl">Country + age</span><span class="track"><span class="fill" style="width:83.9%"></span></span><span class="val">0.252</span></div>
+        <div class="brow"><span class="lbl">Full multinomial logit</span><span class="track"><span class="fill" style="width:76.1%"></span></span><span class="val">0.228</span></div>
+        <div class="brow"><span class="lbl">Birth country only</span><span class="track"><span class="fill" style="width:45.0%"></span></span><span class="val">0.135</span></div>
+        <div class="brow"><span class="lbl">Affiliation only</span><span class="track"><span class="fill" style="width:37.4%"></span></span><span class="val">0.112</span></div>
+        <div class="brow base"><span class="lbl">Majority-class baseline</span><span class="track"><span class="fill" style="width:21.3%"></span></span><span class="val">0.064</span></div>
+        <div class="axis"><div class="axis-inner"><span></span><span class="ticks"><span>0.00</span><span>0.15</span><span>0.30</span></span><span></span></div></div>
+      </div>
+      <figcaption>
+        <b>Figure 5 — Model comparison, macro-averaged F1 on held-out test set (n = 198)</b>
+        Every model beat the majority baseline, but the two-variable model outperformed the full one: the engineered education-distance features did not improve classification. Macro AUC was 0.692 and accuracy 33.8%; per-class results showed the failure was structured rather than uniform, with Economic Sciences and Peace — the two smallest categories — receiving an F1 of zero.
+      </figcaption>
+    </figure>
+
+    <div class="demo">
+      <div class="k">What this demonstrates</div>
+      <ul>
+        <li><strong>Constructing a dataset that did not exist</strong> — programmatic API retrieval, entity resolution, and geographic feature construction from an external knowledge base.</li>
+        <li><strong>Leakage control written by hand</strong> — a custom transformer implementing <code>BaseEstimator</code> and <code>TransformerMixin</code> so preprocessing statistics never cross the train/test boundary.</li>
+        <li><strong>Reporting a hypothesis that failed</strong>, with class-level diagnostics identifying exactly where and why.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<section id="research">
+  <div class="shead">
+    <p class="eyebrow">Research profile</p>
+    <h2>Behavioral science</h2>
+  </div>
+  <div class="prose">
+    <p>My graduate research is in the psychology of emotion regulation, conducted in the research track at the Hebrew University of Jerusalem. My thesis examines <strong>emotional acceptance as a regulatory strategy</strong> — how allowing an emotion to run its course, rather than suppressing or reframing it, shapes the emotional response that follows. Supervised by <strong>Prof. Maya Tamir</strong>.</p>
+    <p>Alongside the thesis I manage the Emotion and Emotion Regulation Laboratory, where the work is operational as much as scientific: recruiting and training research assistants, running experimental protocols end to end, and maintaining the data workflows that experimental research depends on.</p>
+    <p>I am first author on a <strong>preregistered systematic review and meta-analysis</strong> of experimental work on emotional acceptance, with <strong>Prof. Maya Tamir</strong> (Hebrew University of Jerusalem) and <strong>Dr. Benjamin A. Katz</strong> (University of Haifa). Following PRISMA 2020, five database searches across PubMed, Web of Science, PsycINFO and ProQuest Dissertations &amp; Theses returned <strong>10,870 records</strong>, screened against predefined eligibility criteria down to <strong>97 eligible experiments</strong>, with grey literature included. Effects will be pooled as Hedges' <em>g</em> under a <strong>three-level random-effects model</strong> in R (<code>metafor</code>), accounting for the dependency among multiple effect sizes nested within studies.</p><p>The protocol is registered on OSF. Analysis and write-up are ongoing, and findings are not yet public.</p><p>I am also a co-author on a study of <strong>social diffusion in residential renewable-energy adoption</strong>, with <strong>Prof. Itay Fischhendler</strong> (Hebrew University of Jerusalem) and <em>[co-author]</em>. My contribution is the theoretical synthesis: consolidating the literature on <strong>social contagion and peer influence</strong> in technology adoption, and integrating the statistical results with what that literature predicts about behavior and intergroup dynamics. The manuscript is in preparation and has not been submitted; details are not public.</p>
+    <p class="muted">Methods I work with regularly: experimental design, psychometric measurement, statistical analysis of behavioral data, systematic screening and meta-analytic synthesis, and reporting for peer review.</p>
+  </div>
+</section>
+
+<section id="workflow">
+  <div class="shead">
+    <p class="eyebrow">Practice</p>
+    <h2>AI-enabled research workflow</h2>
+  </div>
+  <div class="prose">
+    <p>I use frontier AI models as working instruments across the research process, not as a novelty. In practice that means coding assistance and debugging during analysis, literature synthesis, structuring multi-stage research workflows, and iterating on prompts until the output is reliable enough to build on.</p>
+    <p>The part I treat most carefully is <strong>evaluating model output</strong> — checking claims against sources, catching confident errors, and knowing which tasks a model can be trusted with and which it cannot. Working with these systems on quantitative research has made me a sharp reader of where they break down, which is itself the relevant skill for evaluation work.</p>
+    <p class="muted">This describes applied use of AI systems in research practice. It is not professional machine learning engineering experience.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="shead">
+    <p class="eyebrow">Technical</p>
+    <h2>Tools and methods</h2>
+    <p class="note">Listed only where the projects above provide direct evidence.</p>
+  </div>
+  <div class="skills">
+    <div class="skill"><div class="k">Languages</div>
+      <div class="v">Python 3.12 · R · API-based data retrieval</div></div>
+    <div class="skill"><div class="k">Python stack</div>
+      <div class="v">scikit-learn · pandas · NumPy · gensim · NLTK · rank_bm25 · statsmodels · SciPy · matplotlib · seaborn</div></div>
+    <div class="skill"><div class="k">Supervised learning</div>
+      <div class="v">Multiclass classification · logistic regression · random forests · one-vs-rest · class weighting · pipeline construction · custom transformers</div></div>
+    <div class="skill"><div class="k">Unsupervised &amp; NLP</div>
+      <div class="v">K-Means · silhouette analysis · Word2Vec (skip-gram) · TF-IDF · BM25 · cosine similarity retrieval · text preprocessing</div></div>
+    <div class="skill"><div class="k">Validation</div>
+      <div class="v">Expanding-window temporal CV · stratified group k-fold · leakage prevention · train/validation gap analysis · out-of-time testing</div></div>
+    <div class="skill"><div class="k">Evaluation</div>
+      <div class="v">Macro-F1 · balanced accuracy · log-loss · confusion matrices · ROC and AUC · permutation importance · feature ablation · calibration inspection</div></div>
+    <div class="skill"><div class="k">Feature engineering</div>
+      <div class="v">Sequential rating systems (Elo) · rolling-window aggregates · smoothed rate estimation · geographic distance features · missingness indicators · winsorization and log transforms</div></div>
+    <div class="skill"><div class="k">Research methods</div>
+      <div class="v">Experimental design · behavioral data collection · meta-analysis · SPSS · reproducible analysis practice</div></div>
+  </div>
+</section>
+
+<footer>
+  Every figure on this page reproduces output from the analysis it describes. Metrics are reported as computed on held-out or out-of-time test sets, and no result has been rounded in its favor. Projects marked as team projects were completed collaboratively as part of graduate coursework.
+</footer>
+
+</div>
+</body>
+</html>
